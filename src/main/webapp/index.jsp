@@ -1,555 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>NovaMart — Modern E‑Commerce Experience</title>
-    <!-- Google Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaMart — Premium Shopping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --surface: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --border-light: #e2e8f0;
-            --accent: #3b82f6;
-            --accent-dark: #2563eb;
-            --accent-glow: rgba(59,130,246,0.2);
-            --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
-            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --success: #10b981;
-            --danger: #ef4444;
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-full: 9999px;
-            --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f6f7fb;--surface:#fff;--surface-2:#eef1f6;--text:#101828;
+  --muted:#667085;--line:#e4e7ec;--accent:#635bff;--accent-2:#8b5cf6;
+  --dark:#111827;--success:#12b76a;--danger:#f04438;
+  --shadow:0 16px 45px rgba(16,24,40,.08);--shadow-sm:0 6px 20px rgba(16,24,40,.07);
+  --radius:24px;--transition:.28s cubic-bezier(.2,.8,.2,1)
+}
+body.dark{
+  --bg:#0b1020;--surface:#12192b;--surface-2:#1b2438;--text:#f5f7fa;
+  --muted:#98a2b3;--line:#26324a;--shadow:0 18px 50px rgba(0,0,0,.3)
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;transition:background var(--transition),color var(--transition)}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1240px,calc(100% - 40px));margin:auto}
 
-        body.dark {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --surface: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-light: #334155;
-            --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
-        }
+/* top announcement */
+.announcement{background:var(--dark);color:#fff;text-align:center;font-size:12px;font-weight:700;letter-spacing:.04em;padding:9px 16px}
+.announcement span{opacity:.72;font-weight:500}
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            transition: var(--transition);
-            scroll-behavior: smooth;
-        }
+/* header */
+.header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.header-row{height:76px;display:flex;align-items:center;gap:24px}
+.logo{display:flex;align-items:center;gap:9px;font-size:23px;font-weight:800;letter-spacing:-.04em;white-space:nowrap}
+.logo-mark{width:35px;height:35px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(99,91,255,.3)}
+.nav{display:flex;gap:24px;margin-left:12px}
+.nav a{font-size:13px;font-weight:700;color:var(--muted);transition:var(--transition)}
+.nav a:hover,.nav a.active{color:var(--text)}
+.search{margin-left:auto;width:min(300px,28vw);height:43px;background:var(--surface);border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:var(--shadow-sm)}
+.search i{color:var(--muted);font-size:13px}
+.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:12px}
+.actions{display:flex;gap:9px}
+.icon-btn{width:43px;height:43px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:14px;display:grid;place-items:center;position:relative;transition:var(--transition)}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent)}
+.badge{position:absolute;right:-5px;top:-5px;background:var(--accent);color:#fff;width:19px;height:19px;border-radius:50%;font-size:10px;font-weight:800;display:grid;place-items:center;border:2px solid var(--bg)}
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
+/* hero */
+.hero{padding:32px 0 18px}
+.hero-box{min-height:430px;border-radius:32px;overflow:hidden;position:relative;background:
+ radial-gradient(circle at 78% 22%,rgba(139,92,246,.45),transparent 28%),
+ radial-gradient(circle at 10% 100%,rgba(99,91,255,.35),transparent 34%),
+ linear-gradient(125deg,#0b1020,#191f38 55%,#28234b);color:#fff;display:flex;align-items:center;padding:58px}
+.hero-box:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to right,#000,transparent)}
+.hero-copy{position:relative;z-index:2;max-width:620px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);padding:8px 13px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(42px,6vw,70px);line-height:1.02;letter-spacing:-.065em;margin-bottom:18px}
+.hero h1 span{background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;color:transparent}
+.hero p{font-size:15px;color:rgba(255,255,255,.68);max-width:500px}
+.hero-buttons{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;padding:13px 19px;font-weight:800;font-size:12px;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 25px rgba(99,91,255,.28)}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.07)}
+.btn-light{background:#fff;color:#101828}
+.btn-light:hover{transform:translateY(-2px)}
+.hero-stat{position:absolute;right:45px;bottom:40px;z-index:2;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(15px);border-radius:20px;padding:17px 20px;min-width:180px}
+.hero-stat strong{font-size:23px;display:block}.hero-stat small{color:rgba(255,255,255,.6);font-size:10px}
 
-        /* header modern glass */
-        .glass-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(var(--bg-primary-rgb, 255,255,255), 0.75);
-            border-bottom: 1px solid var(--border-light);
-            background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
-        }
-        body.dark .glass-header {
-            background: color-mix(in srgb, #0f172a 90%, transparent);
-        }
+/* sections */
+.section{padding:54px 0 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:24px}
+.kicker{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.section h2{font-size:29px;letter-spacing:-.04em;margin-top:5px}
+.section-head p{font-size:12px;color:var(--muted);margin-top:4px}
+.view-all{font-size:12px;font-weight:800;color:var(--accent)}
 
-        .header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-            padding: 16px 0;
-        }
+/* categories */
+.category-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.category-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 12px;text-align:center;transition:var(--transition);cursor:pointer}
+.category-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(99,91,255,.35)}
+.category-icon{width:52px;height:52px;border-radius:17px;margin:0 auto 13px;display:grid;place-items:center;background:var(--surface-2);color:var(--accent);font-size:20px}
+.category-card h4{font-size:12px}.category-card span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-        }
+/* products */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.product-card{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:var(--transition);position:relative}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.product-img-wrap{height:270px;background:var(--surface-2);overflow:hidden;position:relative}
+.product-img{width:100%;height:100%;object-fit:cover;transition:.55s ease}
+.product-card:hover .product-img{transform:scale(1.06)}
+.product-badge{position:absolute;top:13px;left:13px;background:var(--dark);color:#fff;padding:6px 10px;border-radius:999px;font-size:9px;font-weight:800;z-index:2}
+.wish{position:absolute;right:13px;top:13px;width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.9);border:0;color:#344054;display:grid;place-items:center;z-index:2}
+.product-info{padding:18px}
+.product-title{font-size:14px;font-weight:800;margin-bottom:7px}
+.rating{font-size:11px;color:var(--muted)}.rating i{color:#fdb022;margin-right:4px}
+.price-row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.price-tag{font-size:18px;font-weight:800;color:var(--text)}
+.old-price-tag{font-size:11px;color:var(--muted);text-decoration:line-through}
+.product-actions{display:flex;gap:8px;margin-top:15px}
+.btn-add{flex:1;background:var(--text);color:var(--surface);border:0;border-radius:12px;padding:11px;font-size:11px;font-weight:800;transition:var(--transition)}
+.btn-add:hover{background:var(--accent)}
+.quick{width:43px;border:1px solid var(--line);background:var(--surface);border-radius:12px;color:var(--text)}
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
+/* sale */
+.flash-sale{margin-top:18px;border-radius:28px;background:var(--surface);border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow-sm)}
+.sale-flex{display:grid;grid-template-columns:1fr 1fr}
+.sale-image{min-height:330px;overflow:hidden}
+.sale-image img{width:100%;height:100%;object-fit:cover}
+.sale-content{padding:42px;display:flex;flex-direction:column;justify-content:center}
+.sale-label{font-size:10px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.sale-content h2{font-size:34px;letter-spacing:-.05em;margin:7px 0}
+.sale-content p{font-size:12px;color:var(--muted)}
+.timer-group{display:flex;gap:9px;margin:22px 0}
+.time-card{background:var(--surface-2);border-radius:14px;padding:10px 13px;min-width:64px;text-align:center}
+.time-number{font-size:20px;font-weight:800}.time-card span{font-size:9px;color:var(--muted)}
 
-        .nav-link {
-            font-weight: 600;
-            transition: var(--transition);
-            color: var(--text-secondary);
-        }
-        .nav-link:hover, .nav-link.active { color: var(--accent); }
+/* testimonials/newsletter */
+.testimonial-scroll{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.testimonial-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px}
+.testimonial-card img{width:43px!important;height:43px!important}
+.testimonial-card p{font-size:12px;color:var(--muted)}
+.newsletter{margin-top:54px;border-radius:28px;padding:44px 25px;text-align:center;color:#fff;background:linear-gradient(120deg,#171b31,#31265e)}
+.newsletter h3{font-size:28px;letter-spacing:-.04em}.newsletter p{font-size:12px;opacity:.65;margin-top:5px}
+.newsletter-form{display:flex;max-width:460px;margin:22px auto 0;gap:8px}
+.newsletter-form input{flex:1;min-width:0;border:0;outline:0;border-radius:13px;padding:13px 16px;background:#fff;color:#101828;font-size:12px}
+.newsletter-form .btn{background:#fff;color:#111827}
 
-        .search-bar {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-full);
-            padding: 8px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-            min-width: 260px;
-        }
-        .search-bar:focus-within { box-shadow: 0 0 0 3px var(--accent-glow); border-color: var(--accent); }
-        .search-bar input {
-            background: transparent;
-            border: none;
-            outline: none;
-            font-size: 0.9rem;
-            width: 100%;
-            color: var(--text-primary);
-        }
+/* footer */
+footer{padding:48px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;padding-bottom:35px}
+footer h4{font-size:12px;margin-bottom:12px}footer p,footer a{font-size:11px;color:var(--muted);line-height:2.2}
+.footer-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:20px;font-size:10px;color:var(--muted)}
 
-        .action-icons {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-        .icon-circle {
-            background: var(--bg-secondary);
-            width: 42px;
-            height: 42px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-full);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid var(--border-light);
-            color: var(--text-primary);
-        }
-        .icon-circle:hover { background: var(--accent); color: white; transform: translateY(-2px); }
-        .cart-badge {
-            position: relative;
-        }
-        .cart-count-badge {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background: var(--accent);
-            color: white;
-            font-size: 11px;
-            font-weight: 800;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* toast */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 18px;border-radius:13px;font-size:11px;font-weight:800;z-index:9999;box-shadow:var(--shadow)}
 
-        /* hero section new */
-        .hero-modern {
-            background: var(--gradient-hero);
-            border-radius: 0 0 48px 48px;
-            margin-bottom: 40px;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-modern::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15), transparent 70%);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: white;
-        }
-        .hero-badge {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(4px);
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .hero-content h1 {
-            font-size: 56px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 32px;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            padding: 12px 32px;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .btn-primary:hover { background: var(--accent-dark); transform: scale(1.02); box-shadow: 0 10px 20px -5px rgba(59,130,246,0.4);}
-        .btn-outline-light {
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.5);
-            color: white;
-            padding: 12px 32px;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        /* category cards modern */
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .section-header h2 {
-            font-size: 32px;
-            font-weight: 800;
-        }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 24px;
-            margin-bottom: 64px;
-        }
-        .category-card {
-            background: var(--surface);
-            border-radius: var(--radius-md);
-            padding: 28px 16px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid var(--border-light);
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-        }
-        .category-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: var(--card-shadow);
-        }
-        .category-icon {
-            font-size: 40px;
-            color: var(--accent);
-            margin-bottom: 16px;
-        }
-
-        /* product grid - premium style */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 32px;
-            margin-bottom: 60px;
-        }
-        .product-card {
-            background: var(--surface);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--border-light);
-            position: relative;
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--card-shadow);
-        }
-        .product-img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .product-card:hover .product-img { transform: scale(1.03); }
-        .product-info {
-            padding: 20px;
-        }
-        .product-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .price-tag {
-            font-weight: 800;
-            font-size: 1.3rem;
-            color: var(--accent);
-        }
-        .old-price-tag {
-            font-size: 0.85rem;
-            text-decoration: line-through;
-            color: var(--text-secondary);
-            margin-left: 8px;
-        }
-        .product-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .btn-add {
-            flex: 1;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            padding: 10px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-primary);
-        }
-        .btn-add:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
-        /* flash sale section premium */
-        .flash-sale {
-            background: linear-gradient(110deg, var(--surface) 0%, var(--bg-secondary) 100%);
-            border-radius: 48px;
-            padding: 48px;
-            margin: 48px 0;
-            border: 1px solid var(--border-light);
-        }
-        .sale-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-        }
-        .sale-image {
-            flex: 1;
-            border-radius: 32px;
-            overflow: hidden;
-            max-height: 320px;
-        }
-        .sale-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .sale-content {
-            flex: 1;
-        }
-        .timer-group {
-            display: flex;
-            gap: 16px;
-            margin: 24px 0;
-        }
-        .time-card {
-            background: var(--bg-primary);
-            padding: 12px 18px;
-            border-radius: 20px;
-            text-align: center;
-            min-width: 70px;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
-        }
-        .time-number {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--accent);
-        }
-
-        /* testimonials carousel style */
-        .testimonial-scroll {
-            display: flex;
-            gap: 28px;
-            overflow-x: auto;
-            padding: 12px 4px 24px;
-            scrollbar-width: thin;
-        }
-        .testimonial-card {
-            min-width: 320px;
-            background: var(--surface);
-            border-radius: 28px;
-            padding: 28px;
-            border: 1px solid var(--border-light);
-        }
-
-        /* newsletter modern */
-        .newsletter-modern {
-            background: linear-gradient(120deg, var(--accent) 0%, #8b5cf6 100%);
-            border-radius: 48px;
-            padding: 56px 32px;
-            text-align: center;
-            color: white;
-        }
-        .newsletter-form {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 24px;
-        }
-        .newsletter-form input {
-            padding: 14px 24px;
-            border-radius: 60px;
-            border: none;
-            width: 300px;
-            background: rgba(255,255,255,0.95);
-            font-size: 1rem;
-        }
-
-        /* footer new */
-        .footer-modern {
-            margin-top: 60px;
-            padding: 48px 0 32px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        /* responsive */
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .search-bar { max-width: 180px; }
-            .hero-content h1 { font-size: 38px; }
-            .container { padding: 0 20px; }
-        }
-        @media (max-width: 640px) {
-            .search-bar { display: none; }
-            .category-grid { grid-template-columns: repeat(2,1fr); }
-            .product-grid { grid-template-columns: 1fr; }
-        }
-        button { background: none; border: none; cursor: pointer; }
-        .theme-toggle { cursor: pointer; }
-    </style>
+/* responsive */
+@media(max-width:1000px){
+ .nav{display:none}.search{width:260px}.category-grid{grid-template-columns:repeat(3,1fr)}
+ .product-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:2fr 1fr 1fr}
+}
+@media(max-width:700px){
+ .container{width:min(100% - 24px,1240px)}.announcement{font-size:10px}
+ .header-row{height:66px;gap:8px}.logo{font-size:19px}.logo-mark{width:31px;height:31px}
+ .search{display:none}.actions{margin-left:auto}.icon-btn{width:39px;height:39px}
+ .hero{padding-top:14px}.hero-box{min-height:520px;padding:30px 24px;align-items:flex-start}
+ .hero h1{font-size:43px;margin-top:25px}.hero p{font-size:13px}
+ .hero-stat{left:24px;right:24px;bottom:24px}.hero-buttons{margin-top:23px}
+ .section{padding-top:42px}.section h2{font-size:24px}.category-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+ .category-card{padding:18px 8px}.product-grid{grid-template-columns:1fr;gap:14px}
+ .product-img-wrap{height:290px}.sale-flex{grid-template-columns:1fr}.sale-image{min-height:230px}.sale-content{padding:26px}
+ .sale-content h2{font-size:28px}.testimonial-scroll{display:flex;overflow-x:auto;padding-bottom:5px}
+ .testimonial-card{min-width:280px}.newsletter{padding:35px 18px}.newsletter-form{flex-direction:column}
+ .footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}
+ .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
 </head>
+
 <body>
-    <header class="glass-header">
-        <div class="container header-flex">
-            <div class="logo"><i class="fas fa-bolt" style="color: #3b82f6;"></i> NovaMart</div>
-            <div class="nav-links">
-                <a href="#" class="nav-link" data-nav="home">Home</a>
-                <a href="#" class="nav-link" data-nav="shop">Shop</a>
-                <a href="#" class="nav-link" data-nav="deals">Deals</a>
-                <a href="#" class="nav-link" data-nav="insights">Insights</a>
-            </div>
-            <div class="search-bar">
-                <i class="fas fa-search" style="color: var(--text-secondary);"></i>
-                <input type="text" id="globalSearch" placeholder="Search products, categories...">
-            </div>
-            <div class="action-icons">
-                <div class="icon-circle theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
-                <div class="icon-circle"><i class="far fa-heart"></i></div>
-                <div class="icon-circle cart-badge" id="cartIconBtn">
-                    <i class="fas fa-bag-shopping"></i>
-                    <span class="cart-count-badge" id="cartCountDisplay">0</span>
-                </div>
-            </div>
+<div class="announcement">FREE SHIPPING ON ORDERS OVER $100 <span>• Easy 30-day returns</span></div>
+
+<header class="header">
+  <div class="container header-row">
+    <a class="logo" href="#"><span class="logo-mark"><i class="fa-solid fa-bolt"></i></span>NovaMart</a>
+    <nav class="nav">
+      <a href="#" class="active">Home</a><a href="#productsSection">Shop</a><a href="#dealsSection">Deals</a><a href="#insights">Insights</a>
+    </nav>
+    <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="globalSearch" placeholder="Search products..."></div>
+    <div class="actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+      <button class="icon-btn" id="cartIconBtn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge" id="cartCountDisplay">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container">
+    <div class="hero-box">
+      <div class="hero-copy">
+        <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> New season • Limited drops</div>
+        <h1>Everything you want.<br><span>All in one place.</span></h1>
+        <p>Discover premium tech, lifestyle essentials and everyday favorites — carefully selected for modern living.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="shopNowHero">Shop collection <i class="fa-solid fa-arrow-right"></i></button>
+          <button class="btn btn-light" id="exploreDealsHero">View today's deals</button>
         </div>
-    </header>
+      </div>
+      <div class="hero-stat"><strong>4.9/5</strong><small><i class="fa-solid fa-star"></i> Loved by 10k+ shoppers</small></div>
+    </div>
+  </div>
+</section>
 
-    <main>
-        <!-- Hero revamped -->
-        <section class="hero-modern">
-            <div class="container hero-content">
-                <div class="hero-badge"><i class="fas fa-gem"></i> Limited Edition Drops</div>
-                <h1>Make Your <span style="color: #3b82f6;">EveryDay</span> Style</h1>
-                <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; opacity: 0.9;">premium materials, and exclusive flash sales.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" id="shopNowHero">My New Collection →</button>
-                    <button class="btn-outline-light" id="exploreDealsHero">Explore Deals</button>
-                </div>
-            </div>
-        </section>
+<div class="container">
+<section class="section">
+  <div class="section-head"><div><div class="kicker">Explore</div><h2>Shop by category</h2><p>Find what fits your lifestyle.</p></div><a class="view-all" href="#productsSection">View all →</a></div>
+  <div class="category-grid" id="categoryGrid"></div>
+</section>
 
-        <div class="container">
-            <!-- Categories Section -->
-            <div class="section-header">
-                <h2>Curated Categories</h2>
-                <p style="color: var(--text-secondary)">Shop by interest — handpicked for you</p>
-            </div>
-            <div class="category-grid" id="categoryGrid"></div>
+<section class="section" id="productsSection">
+  <div class="section-head"><div><div class="kicker">Popular now</div><h2>Trending products</h2><p>What the NovaMart community is loving right now.</p></div><span class="view-all">Fresh arrivals ✦</span></div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
 
-            <!-- Products section -->
-            <div class="section-header" id="productsSection">
-                <h2>✨ Trending Now</h2>
-                <p style="color: var(--text-secondary)">Most loved by our community</p>
-            </div>
-            <div class="product-grid" id="productGrid"></div>
-
-            <!-- Flash Sale Premium -->
-            <div id="dealsSection">
-                <div class="flash-sale">
-                    <div class="sale-flex">
-                        <div class="sale-image">
-                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="MacBook Pro">
-                        </div>
-                        <div class="sale-content">
-                            <h2 style="font-size: 36px; font-weight: 800;">⚡ Flash Sale</h2>
-                            <p style="margin: 12px 0">MacBook Pro M3 — up to 20% off + exclusive bundle</p>
-                            <div class="timer-group" id="countdownTimer">
-                                <div class="time-card"><div class="time-number" id="days">00</div><span>Days</span></div>
-                                <div class="time-card"><div class="time-number" id="hours">00</div><span>Hours</span></div>
-                                <div class="time-card"><div class="time-number" id="minutes">00</div><span>Mins</span></div>
-                                <div class="time-card"><div class="time-number" id="seconds">00</div><span>Secs</span></div>
-                            </div>
-                            <div class="price-tag" style="font-size: 32px;">$1,299 <span class="old-price-tag" style="font-size: 20px;">$1,699</span></div>
-                            <button class="btn-primary" id="flashDealBtn" style="margin-top: 20px;">Grab Deal Now <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonials -->
-            <div class="section-header">
-                <h2>❤️ Customer Love</h2>
-                <p>Real stories from real shoppers</p>
-            </div>
-            <div class="testimonial-scroll" id="testimonialList"></div>
-
-            <!-- Newsletter Premium -->
-            <div class="newsletter-modern">
-                <h3 style="font-size: 28px;">Join the inner circle</h3>
-                <p>Get early access to sales, new arrivals & exclusive rewards</p>
-                <form id="newsletterFormModern" class="newsletter-form">
-                    <input type="email" id="newsEmail" placeholder="you@example.com" required>
-                    <button type="submit" class="btn-primary" style="background: white; color: #0f172a;">Subscribe →</button>
-                </form>
-                <div id="newsletterMsgModern" style="margin-top: 16px; font-size: 14px;"></div>
-            </div>
+<section class="section" id="dealsSection">
+  <div class="section-head"><div><div class="kicker">Don't miss it</div><h2>Flash sale</h2><p>Premium picks, limited-time prices.</p></div></div>
+  <div class="flash-sale">
+    <div class="sale-flex">
+      <div class="sale-image"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1000&q=85" alt="MacBook Pro"></div>
+      <div class="sale-content">
+        <div class="sale-label">Editor's pick</div>
+        <h2>MacBook Pro M3</h2>
+        <p>Up to 20% off + an exclusive bundle while supplies last.</p>
+        <div class="timer-group" id="countdownTimer">
+          <div class="time-card"><div class="time-number" id="days">00</div><span>Days</span></div>
+          <div class="time-card"><div class="time-number" id="hours">00</div><span>Hours</span></div>
+          <div class="time-card"><div class="time-number" id="minutes">00</div><span>Mins</span></div>
+          <div class="time-card"><div class="time-number" id="seconds">00</div><span>Secs</span></div>
         </div>
-    </main>
+        <div><span class="price-tag">$1,299</span> <span class="old-price-tag">$1,699</span></div>
+        <button class="btn btn-primary" id="flashDealBtn" style="margin-top:17px;width:max-content">Grab the deal <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer class="footer-modern">
-        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
-            <div><div class="logo" style="font-size: 24px;">NovaMart</div><p style="margin-top: 12px; max-width: 260px;">Next-gen e-commerce experience. Innovation meets style.</p></div>
-            <div><h4>Explore</h4><p>About<br>Careers<br>Sustainability</p></div>
-            <div><h4>Support</h4><p>Help Center<br>Returns<br>Contact</p></div>
-        </div>
-        <div class="container" style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-light);">© 2026 NovaMart — Redefining modern retail</div>
-    </footer>
+<section class="section" id="insights">
+  <div class="section-head"><div><div class="kicker">Community</div><h2>Customer love</h2><p>Real stories from real shoppers.</p></div></div>
+  <div class="testimonial-scroll" id="testimonialList"></div>
+</section>
 
-    <script>
+<section class="newsletter">
+  <h3>Get the good stuff first.</h3>
+  <p>New arrivals, private offers and early access — straight to your inbox.</p>
+  <form id="newsletterFormModern" class="newsletter-form">
+    <input type="email" id="newsEmail" placeholder="Your email address" required>
+    <button type="submit" class="btn">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+  </form>
+  <div id="newsletterMsgModern" style="margin-top:12px;font-size:11px"></div>
+</section>
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="logo"><span class="logo-mark"><i class="fa-solid fa-bolt"></i></span>NovaMart</div><p style="max-width:280px;margin-top:12px">A cleaner, smarter way to discover products you actually want.</p></div>
+      <div><h4>Explore</h4><a href="#">About</a><br><a href="#">Careers</a><br><a href="#">Sustainability</a></div>
+      <div><h4>Support</h4><a href="#">Help Center</a><br><a href="#">Returns</a><br><a href="#">Contact</a></div>
+      <div><h4>Follow</h4><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a><br><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a><br><a href="#"><i class="fa-brands fa-x-twitter"></i> X / Twitter</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 NovaMart. All rights reserved.</span><span>Designed for a better shopping experience.</span></div>
+  </div>
+</footer>
+
+<script>
         // --- ENHANCED DATA (more premium) ---
         const CATEGORIES = [
             { id: "audio", name: "Audio & Hi-Fi", icon: "fa-headphones" },
-            { id: "wearables", name: "Wearables", icon: "fa-apple-alt" },
+            { id: "wearables", name: "Wearables", icon: "fa-apple" },
             { id: "gaming", name: "Gaming Gear", icon: "fa-gamepad" },
             { id: "fashion", name: "Streetwear", icon: "fa-vest" },
             { id: "accessories", name: "Luxury Acc.", icon: "fa-gem" },
@@ -578,8 +292,8 @@
             categoryGrid.innerHTML = CATEGORIES.map(cat => `
                 <div class="category-card" data-cat="${cat.name}">
                     <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
-                    <h4 style="font-weight: 700;">${cat.name}</h4>
-                    <span style="font-size: 13px; color: var(--text-secondary)">shop now →</span>
+                    <h4>${cat.name}</h4>
+                    <span>Shop now →</span>
                 </div>
             `).join('');
             document.querySelectorAll('.category-card').forEach(card => {
@@ -594,22 +308,23 @@
 
         function renderProducts(productsArray) {
             productGrid.innerHTML = productsArray.map(p => `
-                <div class="product-card">
-                    ${p.badge ? `<div style="position: absolute; top: 12px; left: 12px; background: var(--accent); color: white; padding: 4px 12px; border-radius: 40px; font-size: 12px; font-weight: 700; z-index:2;">${p.badge}</div>` : ''}
-                    <img class="product-img" src="${p.img}" alt="${p.title}" loading="lazy">
+                <article class="product-card">
+                    ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+                    <button class="wish" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
+                    <div class="product-img-wrap"><img class="product-img" src="${p.img}" alt="${p.title}" loading="lazy"></div>
                     <div class="product-info">
                         <div class="product-title">${p.title}</div>
-                        <div style="display: flex; align-items: baseline; gap: 6px; margin: 8px 0;">
+                        <div class="rating"><i class="fas fa-star"></i> ${p.rating} · ${p.reviews} reviews</div>
+                        <div class="price-row">
                             <span class="price-tag">$${p.price.toLocaleString()}</span>
                             ${p.oldPrice ? `<span class="old-price-tag">$${p.oldPrice.toLocaleString()}</span>` : ''}
                         </div>
-                        <div><i class="fas fa-star" style="color: #fbbf24;"></i> ${p.rating} (${p.reviews})</div>
                         <div class="product-actions">
                             <button class="btn-add" data-id="${p.id}"><i class="fas fa-cart-shopping"></i> Add to cart</button>
-                            <button class="btn-add" style="width: auto;"><i class="far fa-heart"></i></button>
+                            <button class="quick" aria-label="Wishlist"><i class="far fa-heart"></i></button>
                         </div>
                     </div>
-                </div>
+                </article>
             `).join('');
             document.querySelectorAll('.btn-add[data-id]').forEach(btn => {
                 btn.addEventListener('click', (e) => {
